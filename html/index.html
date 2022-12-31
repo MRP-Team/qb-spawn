@@ -125,10 +125,19 @@
                                 break;
 
                             case "setupLocations":
-                                axios.post('https://qb-spawn/spawnplayer', {
-                                    spawnloc: 'current',
-                                    typeLoc: 'current'
-                                });
+                                if (data.isNew) {
+                                    viewmodel.positions = {normal: [], appartment: [], house: []}
+                                    viewmodel.selectedValue = {type: "", index: -1}
+
+                                    viewmodel.positions.normal = data.locations
+                                    viewmodel.positions.house = data.houses
+                                    viewmodel.newChar = data.isNew
+                                } else {
+                                    axios.post('https://qb-spawn/spawnplayer', {
+                                        spawnloc: 'current',
+                                        typeLoc: 'current'
+                                    });
+                                }
                                 break;
 
                             case "setupAppartements":
